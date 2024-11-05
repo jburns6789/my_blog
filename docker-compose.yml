@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .  
+    command: python /my_blog/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - /host_mnt/Users/joelburns/my_blog:/my_blog:rw 
+    ports:
+      - "8000:8000"  
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=password
+
+volumes:
+  postgres_data:  
