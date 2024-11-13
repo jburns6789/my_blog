@@ -1,29 +1,45 @@
-{% extends '_base.html'%}
+{% extends '_base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Main Content Area -->
+            <h1>Homepage</h1>
+            {% if user.is_authenticated %}
+                <p>Hi {{ user.email }}!</p>
+                <p><a href="{% url 'logout' %}">Log Out</a></p>
+            {% else %}
+                <p>You are not logged in</p>
+                <a href="{% url 'login' %}">Log In</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
 
-    <h1>Homepage</h1>
-    {% if user.is_authenticated %}
-        <p>Hi {{ user.email }}!</p>
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
-    {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">Log In</a>
-        <a href="{% url 'signup' %}">Sign Up</a>
-    {% endif %}
-    
-    <H2>My Projects</H2>
-        <p>What is Lorem Ipsum?
-            Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy text ever 
-            since the 1500s, when an unknown printer took a galley of type and 
-            scrambled it to make a type specimen book. It has survived not only 
-            five centuries, but also the leap into electronic typesetting, 
-            remaining essentially unchanged. It was popularised in the 1960s 
-            with the release of Letraset sheets containing Lorem Ipsum passages, 
-            and more recently with desktop publishing software like Aldus 
-            PageMaker including versions of Lorem Ipsum.</p>
+            <h2>My Projects</h2>
+            <p>What is Lorem Ipsum?
+                Lorem Ipsum is simply dummy text of the printing and typesetting 
+                industry. Lorem Ipsum has been the industry's standard dummy text ever 
+                since the 1500s, when an unknown printer took a galley of type and 
+                scrambled it to make a type specimen book.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Sidebar or Additional Content -->
+            <h3>Sidebar</h3>
+            <p>This can contain additional links, a profile image, or any other useful information.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Another Row for Images or Additional Information -->
+        <div class="col-md-12 text-center">
+            <img class="img-fluid django_workflow" src="{% static 'images/django_workflow.jpg' %}" alt="Django Workflow">
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
