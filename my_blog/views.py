@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from .forms import CommentForm
+from django.contrib import messages
 
 
 class PostListView(ListView):
@@ -18,6 +19,10 @@ def post_detail(request, year, month, day, post):
     comments = post.comments.filter(active=True)
     new_comment = None
 
+    if request.method == 'POST' and not request.user.is_authenticated:
+        messages.warning(request, "You need to log in to leave a comment.")
+        return redirect('login')
+    
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -32,7 +37,8 @@ def post_detail(request, year, month, day, post):
                   {'post': post,
                    'comments': comments,
                    'new_comments': new_comment,
-                   'comment_form': comment_form})
+                   'comment_form': comment_form if request.user.is_authenticated else None,
+                   },)
 
 @login_required
 def add_comment(request, post_id):

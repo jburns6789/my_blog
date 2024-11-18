@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from django.conf import settings
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -12,7 +13,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=500)
     slug = models.SlugField(max_length=200, unique_for_date='publish')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     content = models.TextField()
     publish = models.DateField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -29,7 +30,7 @@ class Post(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("blog:post_detail", args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
+        return reverse("my_blog:post_detail", args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
     
 
 class Category(models.Model):

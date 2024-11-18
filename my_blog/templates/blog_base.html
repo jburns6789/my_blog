@@ -5,14 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{%  block title %}My Home Page{% endblock title %}</title>
+    <title>{%  block title %}My Blog{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">Static Pages Site</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Blog Site</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,7 +36,7 @@
             <main class="col-md-9">
                 {% block content %}
                 <!-- This is where the page-specific content will go -->
-                <p>Welcome to my Django site!</p>
+                <p>Welcome to my Blog Section, How do i get the views to render?</p>
                 {% endblock %}
             </main>
         </div>
