@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="mt-4 col-md-12 text-center">
             <!-- Main Content Area -->
             <h1>Homepage</h1>
             {% if user.is_authenticated %}
@@ -21,6 +21,8 @@
                 <a href="{% url 'signup' %}">Sign Up</a>
             {% endif %}
 
+                <br><hr><br>
+
             <h2>My Projects</h2>
             <p>What is Lorem Ipsum?
                 Lorem Ipsum is simply dummy text of the printing and typesetting 
@@ -30,18 +32,24 @@
             </p>
         </div>
 
-        <div class="col-md-4">
-            <!-- Sidebar or Additional Content -->
-            <h3>Sidebar</h3>
+        <div class="mt-4 col-md-6">
+            <!-- Additional Content -->
+            <h3>Additional Content</h3>
             <p>This can contain additional links, a profile image, or any other useful information.</p>
         </div>
-    </div>
 
-    <div class="row mt-4">
+        <div class="mt-4 col-md-6">
+            <!-- Additional Content -->
+            <h3>Additional Content</h3>
+            <p>This can contain additional links, a profile image, or any other useful information.</p>
+        </div>
+    
         <!-- Another Row for Images or Additional Information -->
-        <div class="col-md-12 text-center">
+        <div class="mt-4 col-md-12 text-center">
+            <p>Pictures being rendered</p>
             <img class="img-fluid django_workflow" src="{% static 'images/django_workflow.jpg' %}" alt="Django Workflow">
         </div>
+        
     </div>
 </div>
 

@@ -3,8 +3,8 @@ from django.urls import reverse
 from .models import Post
 from datetime import datetime
 from django.contrib.auth import get_user_model
-from django.utils import timezone
-from django.utils.timezone import make_aware
+
+
 
 class PostTests(TestCase):
 
@@ -32,9 +32,6 @@ class PostTests(TestCase):
         self.assertEqual(self.post.content, 'test content')
         self.assertEqual(self.post.publish, datetime(2024, 10, 20))
         self.assertEqual(self.post.status, 'published')
-
-        
-        
 
     def test_post_list_view(self):
         response = self.client.get(reverse('my_blog:post_list'))

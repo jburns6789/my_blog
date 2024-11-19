@@ -1,4 +1,64 @@
 {% extends '_base.html'%}
+{% block title %}About Me{% endblock title %}
+{% block content %}
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c2yX/v1jCAw91fIvp4sFrgD8kWBluMGvHAU/s9hT9wVf4gl5h7p2+kP/sG+QhAgiJGxCd4yirReAJM4=" crossorigin="anonymous">
 
-<h1>Site Features</h1>
+    <body>
+        <header class="bg-primary text-white text-center py-5">
+          <h1>Features of the Site</h1>
+          <p class="lead">Django has many built in features to improve workflow. 
+            A "batterries included" framework.
+          </p>
+        </header>
+      
+        <section class="container py-5">
+          <div class="row">
+            <div class="col-md-6">
+              <h2>Postgres</h2>
+              <p>Detailed description of the feature, its benefits, and how it works.</p>
+              
+            </div>
+            <div class="col-md-6">
+              <h2>Docker</h2>
+              <p>Detailed description of the feature, its benefits, and how it works.</p>
+              
+            </div>
+          </div>
+        </section>
+
+        <section class="container py-5">
+            <div class="row">
+              <div class="col-md-6">
+                <h2>User Registration</h2>
+                <p>Detailed description of the feature, its benefits, and how it works.</p>
+                
+              </div>
+              <div class="col-md-6">
+                <h2>User Authentication</h2>
+                <p>Detailed description of the feature, its benefits, and how it works.</p>
+                
+              </div>
+            </div>
+          </section>
+
+          <section class="container py-5">
+            <div class="row">
+              <div class="col-md-6">
+                <h2>AWS Deployment</h2>
+                <p>Detailed description of the feature, its benefits, and how it works.</p>
+                
+              </div>
+              <div class="col-md-6">
+                <h2>Email Verification</h2>
+                <p>Detailed description of the feature, its benefits, and how it works.</p>
+                
+              </div>
+            </div>
+          </section>
+      
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C89scichPD02hX+8+jZ10qR+wGVB8FpkXpqGnNErzvXhxtuP7PCvcoNJ5lOtW1Fl/++ycT="   
+       crossorigin="anonymous"></script>
+</body>
+
+{% endblock content %}
