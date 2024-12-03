@@ -8,7 +8,7 @@
     <div class="row">
         <div class="mt-4 col-md-12 text-center">
             <!-- Main Content Area -->
-            <h1>Homepage</h1>
+            
             {% if user.is_authenticated %}
                 <p>Hi {{ user.email }}!</p>
                 <form method="post" action="{% url 'logout' %}">
@@ -23,25 +23,26 @@
 
                 <br><hr><br>
 
-            <h2>My Projects</h2>
-            <p>What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting 
-                industry. Lorem Ipsum has been the industry's standard dummy text ever 
-                since the 1500s, when an unknown printer took a galley of type and 
-                scrambled it to make a type specimen book.
+            <h2>Welcome</h2>
+            <br>
+            <p>This site is intended to display web development capabilities.
+            The code for this is open source and available to view on Github. 
+            </p>
+            <p>
+                Powered by Python and Django
             </p>
         </div>
 
         <div class="mt-4 col-md-6">
             <!-- Additional Content -->
-            <h3>Additional Content</h3>
-            <p>This can contain additional links, a profile image, or any other useful information.</p>
+            <h3>Bootstrap</h3>
+            <p>Frontend library using prebuilt JS plugins, HTML and CSS to style websites.</p>
         </div>
 
         <div class="mt-4 col-md-6">
             <!-- Additional Content -->
-            <h3>Additional Content</h3>
-            <p>This can contain additional links, a profile image, or any other useful information.</p>
+            <h3>Deployment</h3>
+            <p>AWS Deployment, EC2 configurations with docker containers and domain access.</p>
         </div>
     
         <!-- Another Row for Images or Additional Information -->

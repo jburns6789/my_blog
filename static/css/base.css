@@ -37,3 +37,15 @@ body {
     height: auto;
     object-fit: cover;
 }
+
+.blog-container {
+    display: flex;
+    flex-direction: column;   
+    align-items: center;      
+}
+
+.blog-post {
+    width: 60%;               
+    margin: 20px 0;           
+    text-align: center;       
+}
