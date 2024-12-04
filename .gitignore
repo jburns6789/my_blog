@@ -1,0 +1,34 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+
+# Django migrations
+*.log
+db.sqlite3
+
+# Static and media files
+/staticfiles/
+/media/
+
+# OS-specific files
+.DS_Store
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# Docker-specific files
+*.dockerignore
+docker-compose.override.yml
