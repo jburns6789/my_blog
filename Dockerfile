@@ -9,7 +9,10 @@ RUN apt-get update && \
 
 WORKDIR /my_blog
 
+RUN pip install --upgrade pip && \
+    pip install pipenv
+
 COPY Pipfile Pipfile.lock /my_blog/
-RUN pip install pipenv && pipenv install --system
+RUN pipenv install --system --deploy
 
 COPY . /my_blog/
