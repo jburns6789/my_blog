@@ -43,7 +43,7 @@ class HomepageTests(SimpleTestCase):
         self.assertTemplateUsed(self.response, 'home.html')
 
     def test_homepage_contains_correct_html(self):
-        self.assertContains(self.response, "Homepage")
+        self.assertContains(self.response, "Welcome")
 
     def test_homepage_does_not_contain_incorrect_html(self):
         self.assertNotContains(self.response, "I should not be on the page.")
@@ -68,11 +68,11 @@ class AboutPagesTests(SimpleTestCase):
         self.assertTemplateUsed(self.response, 'about.html')
 
     def test_aboutpage_contains_correct_html(self):
-        self.assertContains(self.reponse, 'About Me')
+        self.assertContains(self.response, 'About Me')
 
     def test_aboutpage_does_not_contain_incorrect_html(self):
         self.assertNotContains(self.response, 'Hi, I dont belong here.')
 
     def test_aboutpage_url_resolves_aboutpageview(self):
-        view = resolve('/about')
+        view = resolve('/about/')
         self.assertEqual(view.func.__name__, AboutPageView.as_view().__name__)

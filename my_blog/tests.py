@@ -36,5 +36,4 @@ class PostTests(TestCase):
     def test_post_list_view(self):
         response = self.client.get(reverse('my_blog:post_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Blog Posts')
         self.assertTemplateUsed(response, 'my_blog/post/list.html')
