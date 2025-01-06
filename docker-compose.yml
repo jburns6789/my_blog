@@ -1,9 +1,13 @@
 services:
   web:
-    build: .  
-    command: python /my_blog/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - /host_mnt/Users/joelburns/my_blog:/my_blog:rw 
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    #volumes:
+      #- #static_volume:/app/staticfiles
+    env_file:
+      - .env
     ports:
       - "8000:8000"  
     depends_on:
@@ -14,7 +18,20 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_PASSWORD=password
+      POSTGRES_USER: django_user
+      POSTGRES_PASSWORD: password3
+      POSTGRES_DB: django_db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/staticfiles
+    depends_on:
+      - web
 
 volumes:
+  static_volume:
   postgres_data:  
