@@ -20,39 +20,37 @@
                 <a href="{% url 'account_login' %}">Log In</a>
                 <a href="{% url 'account_signup' %}">Sign Up</a>
             {% endif %}
-
-                <br><hr><br>
-
-            <h2>Welcome</h2>
-            <br>
-            <p>This site is intended to display web development capabilities.
-            The code for this is open source and available to view on Github.
-            
-            Are the changes being rendered? or is crispy forms not working?
-            </p>
-            <p>
-                Powered by Python and Django
-            </p>
         </div>
 
-        <div class="mt-4 col-md-6">
-            <!-- Additional Content -->
-            <h3>Bootstrap</h3>
-            <p>Frontend library using prebuilt JS plugins, HTML and CSS to style websites.</p>
+        <div class="hero-section d-flex flex-column justify-content=center">
+            <h1 class="display-4 text-center">Hi, I'm Joel Burns!</h1>
+            <p class="lead">I build scalable and secure web applications using Python, Django, and modern web technologies.</p>
+            <a href="https://github.com/jburns6789" class="btn btn-primary btn-lg">View My GitHub</a>
         </div>
 
-        <div class="mt-4 col-md-6">
-            <!-- Additional Content -->
-            <h3>Deployment</h3>
-            <p>AWS Deployment, EC2 configurations with docker containers and domain access.</p>
+        <div class="skills-section mt-5 mb-5">
+            <h2 class="text-center">Skills & Technologies</h2>
+            <div class="d-flex justify-content-center flex-wrap mt-4">
+                <div class="p-3 text-center">
+                    <img src="{% static 'images/icons/python.png' %}" alt="Python" width="50">
+                    <p>Python</p>
+                </div>
+                <div class="p-3 text-center">
+                    <img src="{% static 'images/icons/icons8-django-96.png' %}" alt="Django" width="50">
+                    <p>Django</p>
+                </div>
+                <div class="p-3 text-center">
+                    <img src="{% static 'images/icons/icons8-aws-96.png' %}" alt="AWS" width="50">
+                    <p>AWS</p>
+                </div>
+                <div class="p-3 text-center">
+                    <img src="{% static 'images/icons/docker.png' %}" alt="Docker" width="50">
+                    <p>Docker</p>
+                </div>
+
+            </div>
         </div>
     
-        <!-- Another Row for Images or Additional Information -->
-        <div class="mt-4 col-md-12 text-center">
-            <p>Pictures being rendered</p>
-            <img class="img-fluid django_workflow" src="{% static 'images/django_workflow.jpg' %}" alt="Django Workflow">
-        </div>
-        
     </div>
 </div>
 
