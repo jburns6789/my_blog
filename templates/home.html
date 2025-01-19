@@ -4,11 +4,10 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="mt-4 col-md-12 text-center">
-            <!-- Main Content Area -->
-            
+<div class="container p-3 mx-auto">
+    <div class="d-flex justify-content-center align-items-start flex-wrap">
+
+        <div class="auth-section p-3 text-center">
             {% if user.is_authenticated %}
                 <p>Hi {{ user.email }}!</p>
                 <form method="post" action="{% url 'account_logout' %}">
@@ -22,13 +21,13 @@
             {% endif %}
         </div>
 
-        <div class="hero-section d-flex flex-column justify-content=center">
-            <h1 class="display-4 text-center">Hi, I'm Joel Burns!</h1>
-            <p class="lead">I build scalable and secure web applications using Python, Django, and modern web technologies.</p>
+        <div class="hero-section d-flex flex-column justify-content-center align-items-center text-center p-5">
+            <h1 class="display-4">Hi, I'm Joel Burns!</h1>
+            <p class="lead mt-3">I build scalable and secure web applications using Python, Django, and modern web technologies.</p>
             <a href="https://github.com/jburns6789" class="btn btn-primary btn-lg">View My GitHub</a>
         </div>
 
-        <div class="skills-section mt-5 mb-5">
+        <div class="skills-section p-3 text-center">
             <h2 class="text-center">Skills & Technologies</h2>
             <div class="d-flex justify-content-center flex-wrap mt-4">
                 <div class="p-3 text-center">
@@ -47,11 +46,20 @@
                     <img src="{% static 'images/icons/docker.png' %}" alt="Docker" width="50">
                     <p>Docker</p>
                 </div>
-
             </div>
         </div>
-    
     </div>
 </div>
+
+<div class="blog-link p-3 text-center">
+    <h2 class="text-center">Blog Feature</h2>
+    <div class="d-flex justify-content-center flex-wrap mt-4">
+        <div class="p-3 text-center">
+            <a class="nav-link" href="{% url 'my_blog:post_list' %}">Check out my blog built using Django.</a>
+            <p>The blog is dynamically rendered using Django and Postgres for storage.
+        </div>
+    </div>
+</div>
+
 
 {% endblock content %}

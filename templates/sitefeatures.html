@@ -1,64 +1,112 @@
-{% extends '_base.html'%}
-{% block title %}About Me{% endblock title %}
+{% extends '_base.html' %}
+{% block title %}Site Features{% endblock title %}
 {% block content %}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c2yX/v1jCAw91fIvp4sFrgD8kWBluMGvHAU/s9hT9wVf4gl5h7p2+kP/sG+QhAgiJGxCd4yirReAJM4=" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c2yX/v1jCAw91fIvp4sFrgD8kWBluMGvHAU/s9hT9wVf4gl5h7p2+kP/sG+QhAgiJGxCd4yirReAJM4=" crossorigin="anonymous">
 
-    <body>
-        <header class="bg-primary text-white text-center py-5">
-          <h1>Features of the Site</h1>
-          <p class="lead">Django has many built in features to improve workflow. 
-            A "batterries included" framework.
-          </p>
-        </header>
-      
-        <section class="container py-5">
-          <div class="row">
+<body>
+    <header class="bg-primary text-white text-center py-5">
+        <h1>Features of the Site</h1>
+        <p class="lead">
+            Several Technologies have been configured and deployed to make this site possible.
+        </p>
+    </header>
+
+    <section class="container py-5">
+        <div class="row">
             <div class="col-md-6">
-              <h2>Postgres</h2>
-              <p>Detailed description of the feature, its benefits, and how it works.</p>
-              
+                <h2>Django</h2>
+                <p>
+                    Django is an open-source web framework designed to help developers build secure and maintainable 
+                    websites efficiently. Some of its most notable features include an Object-Relational Mapper (ORM) 
+                    for seamless database interactions, a "batteries-included" philosophy that provides numerous 
+                    built-in tools, robust authentication systems, and its versatility in handling a wide range of web 
+                    development tasks.
+                </p>
             </div>
             <div class="col-md-6">
-              <h2>Docker</h2>
-              <p>Detailed description of the feature, its benefits, and how it works.</p>
-              
+                <h2>AWS</h2>
+                <p>
+                    AWS (Amazon Web Services) is a leading cloud platform offering scalable and flexible solutions for 
+                    application deployment, including Amazon EC2 (Elastic Compute Cloud). EC2 provides virtual servers 
+                    with the ability to scale vertically or horizontally to meet workload demands. It supports a wide 
+                    variety of instance types optimized for compute, memory, storage, or GPU needs and follows a 
+                    pay-as-you-go pricing model with options like on-demand, reserved, and spot instances. Developers 
+                    can create reusable, pre-configured environments using custom Amazon Machine Images (AMIs). EC2 
+                    integrates with AWS services like VPC for secure networking and efficient traffic management.
+                </p>
             </div>
-          </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="container py-5">
-            <div class="row">
-              <div class="col-md-6">
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
                 <h2>User Registration</h2>
-                <p>Detailed description of the feature, its benefits, and how it works.</p>
-                
-              </div>
-              <div class="col-md-6">
-                <h2>User Authentication</h2>
-                <p>Django Allauth. add a link.</p>
-                
-              </div>
+                <p>
+                    Django's user registration module provides a built-in User model with fields for common attributes 
+                    like username, email, and password. It is part of Django's authentication framework, which includes 
+                    secure password hashing, login, logout, and session management. Developers can extend or replace the 
+                    default User model for custom functionality. Built-in forms like UserCreationForm simplify user 
+                    registration, and third-party packages like django-allauth offer additional features like social 
+                    authentication and email verification. Signals such as user_logged_in and user_logged_out enable 
+                    tracking and customizing user events.
+                </p>
             </div>
-          </section>
+            <div class="col-md-6">
+                <h2>Docker</h2>
+                <p>
+                    Docker is a platform that enables the containerization of applications. It allows developers to 
+                    package their code, along with all its dependencies, into containers that run independently of the 
+                    host operating system. These containers leverage the host machine's hardware resources efficiently. 
+                    Docker containers are highly portable and can be deployed across a wide range of environments seamlessly.
+                </p>
+            </div>
+        </div>
+    </section>
 
-          <section class="container py-5">
-            <div class="row">
-              <div class="col-md-6">
-                <h2>AWS Deployment</h2>
-                <p>Detailed description of the feature, its benefits, and how it works.</p>
-                
-              </div>
-              <div class="col-md-6">
-                <h2>Email Verification</h2>
-                <p>Detailed description of the feature, its benefits, and how it works.</p>
-                
-              </div>
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>NGINX</h2>
+                <p>
+                    NGINX is an HTTP web server that operates on a client-server model to handle user requests 
+                    efficiently. It excels at serving static files and is highly performant for this purpose. In setups 
+                    involving dynamic content, NGINX often works in tandem with Gunicorn, facilitating smooth 
+                    communication between the two to manage application requests and responses.
+                </p>
             </div>
-          </section>
-      
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C89scichPD02hX+8+jZ10qR+wGVB8FpkXpqGnNErzvXhxtuP7PCvcoNJ5lOtW1Fl/++ycT="   
-       crossorigin="anonymous"></script>
+            <div class="col-md-6">
+                <h2>Gunicorn</h2>
+                <p>
+                    Gunicorn is a Python WSGI (Web Server Gateway Interface) HTTP server used for running web 
+                    applications. In this setup, the Django application is hosted within Gunicorn, which processes 
+                    incoming requests. These requests are routed through NGINX, which acts as a reverse proxy, ensuring 
+                    efficient communication between the client, NGINX, and Gunicorn for seamless application delivery.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+      <div class="row">
+          <div class="col-md-6">
+              <h2>Postgres</h2>
+              <p>
+                  PostgreSQL, commonly referred to as Postgres, is a powerful, free, and open-source relational 
+                  database management system (RDBMS). It is renowned for its strong security features, reliability, 
+                  and strict compliance with SQL standards. Additionally, PostgreSQL supports advanced data types, 
+                  extensibility, and robust transactional capabilities, making it a preferred choice for a wide range 
+                  of applications.
+              </p>
+          </div>
+          <div class="col-md-6"></div>
+      </div>
+  </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C89scichPD02hX+8+jZ10qR+wGVB8FpkXpqGnNErzvXhxtuP7PCvcoNJ5lOtW1Fl/++ycT=" crossorigin="anonymous"></script>
 </body>
 
 {% endblock content %}
