@@ -32,8 +32,17 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env('DEBUG_SETTING')
 #DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'www.django-blog-jb.com']
+ALLOWED_HOSTS = ['www.django-blog-jb.com', 'django-blog-jb.com', 'localhost']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.django-blog-jb.com",
+    "https://django-blog-jb.com",
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
