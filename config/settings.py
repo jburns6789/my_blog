@@ -29,20 +29,34 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 #SECRET_KEY = 'django-insecure-%z*!s8z6%rw6z5*rkn&+gs6j^cixx!7q)57)0l&7y4f5sx^h#n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG_SETTING')
+DEBUG = env.bool('DEBUG_SETTING', default=False)
 #DEBUG = True
 
-ALLOWED_HOSTS = ['www.django-blog-jb.com', 'django-blog-jb.com', 'localhost']
+ALLOWED_HOSTS = [
+	'www.django-blog-jb.com',
+        'django-blog-jb.com',
+        '3.15.27.43',
+        'localhost',
+]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://www.django-blog-jb.com",
     "https://django-blog-jb.com",
+    "https://3.15.27.43",
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+
+
+
+
+
+CSRF_FAILURE_VIEW = 'my_pages.views.csrf_failure_view'
 
 # Application definition
 
@@ -112,14 +126,6 @@ DATABASES = {
         'PORT': env('DATABASE_PORT')
     }
 
-    #  'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'postgres',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'password3',
-    #     'HOST': 'db',
-    #     'PORT': '5432'
-    # }
 }
 
 
@@ -211,3 +217,4 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+

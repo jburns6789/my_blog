@@ -9,3 +9,8 @@ class AboutPageView(TemplateView):
 
 class SiteFeaturesView(TemplateView):
     template_name = 'sitefeatures.html'
+
+from django.http import JsonResponse
+
+def debug_view(request):
+    return JsonResponse({"headers": dict(request.headers)}, status=200)
