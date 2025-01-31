@@ -6,6 +6,9 @@ from .models import Post, Comment
 from .forms import CommentForm
 from django.contrib import messages
 
+from rest_framework import generics
+from .serializers import PostSerializer, CommentSerializer
+
 
 class PostListView(ListView):
     queryset = Post.objects.filter(status='published')
@@ -53,4 +56,16 @@ def add_comment(request, post_id):
     else:
         form = CommentForm
     return render(request, 'my_blog/post/add_comment.html', {'form': form, 'post': post})
+
+class PostListAPIView(generics.ListCreateAPIView):
+    queryset = Post.objects.filter(status='published')
+    serializer_class = PostSerializer
+
+class PostDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = PostSerializer
+    lookup_field = 'slug'
+
+class CommentListAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.filter(active=True)
+    serializer_class = CommentSerializer
 

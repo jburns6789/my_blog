@@ -24,6 +24,8 @@ urlpatterns = [
 
     path('', include('my_pages.urls')),
     
-    path('my_blog', include('my_blog.urls')),
+    path('my_blog/', include('my_blog.urls')),
+
+    path('api-auth/', include('rest_framework.urls'))
 
 ]
