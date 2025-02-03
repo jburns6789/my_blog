@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
         'django-blog-jb.com',
         '3.15.27.43',
         'localhost',
+        '0.0.0.0', #development
 ]
 
 CSRF_TRUSTED_ORIGINS = [
