@@ -57,15 +57,16 @@ def add_comment(request, post_id):
         form = CommentForm
     return render(request, 'my_blog/post/add_comment.html', {'form': form, 'post': post})
 
-class PostListAPIView(generics.ListCreateAPIView):
+class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects.filter(status='published')
     serializer_class = PostSerializer
 
 class PostDetailAPIView(generics.RetrieveAPIView):
+    queryset = Post.objects.filter(status='published')
     serializer_class = PostSerializer
     lookup_field = 'slug'
-
-class CommentListAPIView(generics.ListCreateAPIView):
+    
+class CommentListAPIView(generics.ListAPIView):
     queryset = Comment.objects.filter(active=True)
     serializer_class = CommentSerializer
 
