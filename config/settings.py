@@ -53,10 +53,6 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 
 
-
-
-
-
 CSRF_FAILURE_VIEW = 'my_pages.views.csrf_failure_view'
 
 # Application definition
