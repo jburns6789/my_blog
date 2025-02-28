@@ -32,10 +32,27 @@ services:
       - static_volume:/app/staticfiles
       - nginx_logs:/var/log/nginx
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - web
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: >
+      /bin/sh -c 'trap exit TERM; while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        # Optionally, reload Nginx if certificates were updated:
+        docker-compose exec nginx nginx -s reload;
+        sleep 12h & wait $${!};
+      done;'
+    depends_on:
+      - nginx
 
 volumes:
   static_volume:
   postgres_data:  
   nginx_logs:
+  certs:
