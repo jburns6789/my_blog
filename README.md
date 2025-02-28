@@ -1,8 +1,8 @@
-# My Django Blog
+### My Django Blog
 
 Welcome to the repository for my blog! This project demonstrates my expertise in modern web development using Django, Docker, AWS, and other technologies. It serves as both a personal project and a platform to share my insights through blogging.
 
-## 🚀 Features of the Site
+Features of the Site
 
 This site was built with several cutting-edge technologies and techniques to ensure scalability, security, and maintainability:
 
@@ -47,7 +47,7 @@ This site was built with several cutting-edge technologies and techniques to ens
 
 ---
 
-## 🛠 Technologies Used
+### Technologies Used
 
 - **Backend**: Django
 - **Frontend**: Bootstrap
@@ -59,13 +59,13 @@ This site was built with several cutting-edge technologies and techniques to ens
 
 ---
 
-## 📘 About the Blog
+### About the Blog
 
 This blog is a space where I share my thoughts and experiences on web development, cloud computing, and more. 
 Check out the blog: [My Blog](#)
 
 Contributions, suggestions, and improvements are welcome! Feel free to open an issue or submit a pull request.
 
-📝 License
+### License
 This project is licensed under the MIT License. See LICENSE for details.
 
