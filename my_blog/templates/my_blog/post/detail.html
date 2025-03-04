@@ -1,4 +1,5 @@
 {% extends "blog_base.html" %}
+{% load markdown_extras %}
 
 {% block title %}
     {{ post.title }} 
@@ -12,10 +13,12 @@
     </header>
     <br>
     <div class="post-content">
-        {{ post.content|safe }}
+        {{ post.content|render_markdown }}
     </div>
 </article>
+
 <br>
+
 <section class="comments">
     <h2>Comments</h2>
     {% for comment in comments %}
@@ -27,7 +30,9 @@
         <p>No comments yet.</p>
     {% endfor %}
 </section>
+
 <br>
+
 <section class="add-comment">
     <h3>Add a Comment</h3>
     <form method="post">
