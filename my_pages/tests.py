@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from .views import HomePageView, AboutPageView
+from .views import HomePageView, AboutPageView, SiteFeaturesView
 
 
 # class HomepageTests(SimpleTestCase):
@@ -71,8 +71,30 @@ class AboutPagesTests(SimpleTestCase):
         self.assertContains(self.response, 'About Me')
 
     def test_aboutpage_does_not_contain_incorrect_html(self):
-        self.assertNotContains(self.response, 'Hi, I dont belong here.')
+        self.assertNotContains(self.response, 'I should not be on the page.')
 
     def test_aboutpage_url_resolves_aboutpageview(self):
         view = resolve('/about/')
         self.assertEqual(view.func.__name__, AboutPageView.as_view().__name__)
+
+class SiteFeaturesTests(SimpleTestCase):
+
+    def setUp(self):
+        url = reverse('sitefeatures')
+        self.response = self.client.get(url)
+
+    def test_site_features_status_code(self):
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_site_features_template(self):
+        self.assertTemplateUsed(self.response, 'sitefeatures.html')
+
+    def test_site_features_correct_html(self):
+        self.assertContains(self.response, 'Features of the Site')
+
+    def test_site_features_does_not_contain(self):
+        self.assertNotContains(self.response, 'I should not be on the page.')
+
+    def test_site_features_url_resolves_sitefeaturesview(self):
+        view = resolve('/sitefeatures/')
+        self.assertEqual(view.func.__name__, SiteFeaturesView.as_view().__name__)

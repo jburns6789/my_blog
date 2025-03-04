@@ -1,28 +1,39 @@
 {% extends "blog_base.html" %}
 
 {% block title %}
-{{ post.title }}
+    {{ post.title }} 
 {% endblock %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
-<p>Published on: {{ post.publish }}</p>
-<div>
-    {{ post.content }}
-</div>
-
-<h2>Comments</h2>
-{% for comment in comments %}
-    <p>{{ comment.body }}</p>
-    <p>By {{ comment.name }} on {{ comment.created }}</p>
-{% empty %}
-    <p>No comments yet.</p>
-{% endfor %}
-
-<h3>Add a Comment</h3>
-<form method="post">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<article class="blog-post">
+    <header>
+        <h1 class="post-title">{{ post.title }}</h1>
+        <p class="publish-date">Published on: {{ post.publish }}</p>
+    </header>
+    <br>
+    <div class="post-content">
+        {{ post.content|safe }}
+    </div>
+</article>
+<br>
+<section class="comments">
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="comment-body">{{ comment.body }}</p>
+            <p class="comment-meta">By <strong>{{ comment.name }}</strong> on {{ comment.created|date:"F j, Y, g:i a" }}</p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+</section>
+<br>
+<section class="add-comment">
+    <h3>Add a Comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
 {% endblock %}
