@@ -19,6 +19,11 @@
 
 <br>
 
+{% with test_md="# Hello World\nThis is **bold** text." as sample %}
+    {{ sample|render_markdown }}
+{% endwith %}
+
+
 <section class="comments">
     <h2>Comments</h2>
     {% for comment in comments %}
