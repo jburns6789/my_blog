@@ -32,3 +32,5 @@ poetry.lock
 # Docker-specific files
 *.dockerignore
 docker-compose.override.yml
+
+settings.dev.py
