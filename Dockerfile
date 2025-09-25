@@ -4,28 +4,36 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-#Install dependencies 
+# Install dependencies 
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Copy requirements first for better caching
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project files
 COPY . .
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_ENV=production
+
+# Create staticfiles directory
+RUN mkdir -p /app/staticfiles
+
+# Create entrypoint script
+COPY docker-entrypoint.prod.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 # Expose the application port
 EXPOSE 8000
 
-# Collect static files and run migrations during the build
-RUN python manage.py collectstatic --noinput
+# Use entrypoint script
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Start the application
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000","--workers", "3"]
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
