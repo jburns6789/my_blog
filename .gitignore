@@ -24,6 +24,8 @@ db.sqlite3
 
 # Environment variables
 .env
+.env.dev
+.env.prod
 
 # Pipenv and Poetry
 Pipfile.lock
