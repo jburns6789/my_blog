@@ -11,10 +11,13 @@ from .serializers import PostSerializer, CommentSerializer
 
 
 class PostListView(ListView):
-    queryset = Post.objects.filter(status='published')
+    queryset = Post
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'my_blog/post/list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(status='published').order_by('-publish')
 
 
 def post_detail(request, year, month, day, post):
@@ -69,4 +72,5 @@ class PostDetailAPIView(generics.RetrieveAPIView):
 class CommentListAPIView(generics.ListAPIView):
     queryset = Comment.objects.filter(active=True)
     serializer_class = CommentSerializer
+
 

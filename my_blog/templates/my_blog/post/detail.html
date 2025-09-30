@@ -19,11 +19,6 @@
 
 <br>
 
-{% with test_md="# Hello World\nThis is **bold** text." as sample %}
-    {{ sample|render_markdown }}
-{% endwith %}
-
-
 <section class="comments">
     <h2>Comments</h2>
     {% for comment in comments %}
@@ -40,10 +35,14 @@
 
 <section class="add-comment">
     <h3>Add a Comment</h3>
+    {% if comment_form %}
     <form method="post">
         {% csrf_token %}
         {{ comment_form.as_p }}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    {% else %}
+    <p><a href="{% url 'login' %}">Login</a> to leave a comment.</p>
+    {% endif %}
 </section>
 {% endblock %}
