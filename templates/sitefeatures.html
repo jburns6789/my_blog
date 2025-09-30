@@ -1,137 +1,438 @@
 {% extends '_base.html' %}
-{% block title %}Site Features{% endblock title %}
+{% block title %}Site Architecture & Technologies{% endblock title %}
+
 {% block content %}
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-T3c2yX/v1jCAw91fIvp4sFrgD8kWBluMGvHAU/s9hT9wVf4gl5h7p2+kP/sG+QhAgiJGxCd4yirReAJM4=" crossorigin="anonymous">
-
-<body>
-    <br>
-    <header class="bg-primary text-white text-center py-5 rounded">
-        <h1>Features of the Site</h1>
-        <p class="lead">
-            Several Technologies have been configured and deployed to make this site possible.
+<!-- Hero Section -->
+<section class="bg-gradient-dark text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-3">Site Architecture & Technologies</h1>
+        <p class="lead mb-4">
+          A comprehensive overview of the modern technologies and frameworks powering this platform
         </p>
-    </header>
-
-    <section class="container py-5">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Django</h2>
-                <p>
-                    Django is an open-source web framework designed to help developers build secure and maintainable 
-                    websites efficiently. Some of its most notable features include an Object-Relational Mapper (ORM) 
-                    for seamless database interactions, a "batteries-included" philosophy that provides numerous 
-                    built-in tools, robust authentication systems, and its versatility in handling a wide range of web 
-                    development tasks.
-                </p>
-            </div>
-
-            <div class="col-md-6">
-                <h2>AWS</h2>
-                <p>
-                    AWS (Amazon Web Services) is a leading cloud platform offering scalable and flexible solutions for 
-                    application deployment, including Amazon EC2 (Elastic Compute Cloud). EC2 provides virtual servers 
-                    with the ability to scale vertically or horizontally to meet workload demands. It supports a wide 
-                    variety of instance types optimized for compute, memory, storage, or GPU needs and follows a 
-                    pay-as-you-go pricing model with options like on-demand, reserved, and spot instances. Developers 
-                    can create reusable, pre-configured environments using custom Amazon Machine Images (AMIs). EC2 
-                    integrates with AWS services like VPC for secure networking and efficient traffic management.
-                </p>
-            </div>
+        <div class="d-flex justify-content-center flex-wrap gap-2">
+          <span class="badge bg-light text-dark px-3 py-2">Django</span>
+          <span class="badge bg-light text-dark px-3 py-2">AWS EC2</span>
+          <span class="badge bg-light text-dark px-3 py-2">Docker</span>
+          <span class="badge bg-light text-dark px-3 py-2">PostgreSQL</span>
+          <span class="badge bg-light text-dark px-3 py-2">Nginx</span>
+          <span class="badge bg-light text-dark px-3 py-2">REST API</span>
         </div>
-    </section>
-
-    <section class="container py-5">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>User Registration</h2>
-                <p>
-                    Django's user registration module provides a built-in User model with fields for common attributes 
-                    like username, email, and password. It is part of Django's authentication framework, which includes 
-                    secure password hashing, login, logout, and session management. Developers can extend or replace the 
-                    default User model for custom functionality. Built-in forms like UserCreationForm simplify user 
-                    registration, and third-party packages like django-allauth offer additional features like social 
-                    authentication and email verification. Signals such as user_logged_in and user_logged_out enable 
-                    tracking and customizing user events.
-                </p>
-            </div>
-
-            <div class="col-md-6">
-                <h2>Docker</h2>
-                <p>
-                    Docker is a platform that enables the containerization of applications. It allows developers to 
-                    package their code, along with all its dependencies, into containers that run independently of the 
-                    host operating system. These containers leverage the host machine's hardware resources efficiently. 
-                    Docker containers are highly portable and can be deployed across a wide range of environments seamlessly.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="container py-5">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>NGINX</h2>
-                <p>
-                    NGINX is an HTTP web server that operates on a client-server model to handle user requests 
-                    efficiently. It excels at serving static files and is highly performant for this purpose. In setups 
-                    involving dynamic content, NGINX often works in tandem with Gunicorn, facilitating smooth 
-                    communication between the two to manage application requests and responses.
-                </p>
-            </div>
-
-            <div class="col-md-6">
-                <h2>Gunicorn</h2>
-                <p>
-                    Gunicorn is a Python WSGI (Web Server Gateway Interface) HTTP server used for running web 
-                    applications. In this setup, the Django application is hosted within Gunicorn, which processes 
-                    incoming requests. These requests are routed through NGINX, which acts as a reverse proxy, ensuring 
-                    efficient communication between the client, NGINX, and Gunicorn for seamless application delivery.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="container py-5">
-      <div class="row">
-          <div class="col-md-6">
-              <h2>Postgres</h2>
-              <p>
-                  PostgreSQL, commonly referred to as Postgres, is a powerful, free, and open-source relational 
-                  database management system (RDBMS). It is renowned for its strong security features, reliability, 
-                  and strict compliance with SQL standards. Additionally, PostgreSQL supports advanced data types, 
-                  extensibility, and robust transactional capabilities, making it a preferred choice for a wide range 
-                  of applications.
-              </p>
-          </div>
-
-          <div class="col-md-6">
-            <h2>API</h2>
-            <p>
-                Django REST Framework (DRF) is a powerful library used with Django to build RESTful APIs. These APIs 
-                serve as an interface to expose backend data through endpoints, enabling seamless communication with frontend applications.
-                Modern frontend frameworks such as React, Vue, and Angular commonly interact with REST APIs to dynamically 
-                render content. However, this site follows a monolithic architecture, where HTML is rendered dynamically on the server.
-                REST, which stands for Representational State Transfer, is an architectural style for web services that operates 
-                over the HTTP protocol. It is characterized by three key principles:
-                Data Format: REST APIs typically return data in JSON or XML formats.
-                Statelessness: Each request from a client to the server must contain all necessary information, as the 
-                server does not store client session data.
-                HTTP Methods: REST APIs support standard HTTP verbs such as GET (retrieve data), POST (create data), 
-                PUT (update data), and DELETE (remove data).
-                By leveraging Django REST Framework, developers can efficiently build scalable and maintainable web APIs 
-                that integrate with various frontend technologies or third-party services.
-                Checkout: https://www.django-blog-jb.com/my_blog/api/posts/
-
-            </p>
-        </div>
-          <div class="col-md-6"></div>
       </div>
-  </section>
+    </div>
+  </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-C89scichPD02hX+8+jZ10qR+wGVB8FpkXpqGnNErzvXhxtuP7PCvcoNJ5lOtW1Fl/++ycT=" crossorigin="anonymous"></script>
-</body>
+<!-- Architecture Overview -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold">System Architecture</h2>
+      <p class="lead text-muted">Modern, scalable, and secure web application architecture</p>
+    </div>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="bg-white rounded-4 shadow-sm p-4">
+          <div class="row text-center g-4">
+            <div class="col-md-2">
+              <div class="p-3">
+                <i class="fas fa-users fa-3x text-primary mb-2"></i>
+                <h6 class="fw-bold">Users</h6>
+                <small class="text-muted">Web Clients</small>
+              </div>
+            </div>
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+              <i class="fas fa-arrow-right text-muted"></i>
+            </div>
+            <div class="col-md-2">
+              <div class="p-3">
+                <i class="fas fa-server fa-3x text-success mb-2"></i>
+                <h6 class="fw-bold">Nginx</h6>
+                <small class="text-muted">Reverse Proxy</small>
+              </div>
+            </div>
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+              <i class="fas fa-arrow-right text-muted"></i>
+            </div>
+            <div class="col-md-2">
+              <div class="p-3">
+                <i class="fab fa-python fa-3x text-warning mb-2"></i>
+                <h6 class="fw-bold">Django</h6>
+                <small class="text-muted">Application</small>
+              </div>
+            </div>
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+              <i class="fas fa-arrow-right text-muted"></i>
+            </div>
+            <div class="col-md-2">
+              <div class="p-3">
+                <i class="fas fa-database fa-3x text-info mb-2"></i>
+                <h6 class="fw-bold">PostgreSQL</h6>
+                <small class="text-muted">Database</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Technology Stack -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold">Technology Stack</h2>
+      <p class="lead text-muted">Detailed breakdown of each technology and its role</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Django -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-success rounded-3 p-3 me-3">
+                <i class="fab fa-python fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">Django Framework</h4>
+                <small class="text-muted">Backend Web Framework</small>
+              </div>
+            </div>
+            <p class="card-text">
+              Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. 
+              Features include built-in ORM, admin interface, authentication system, and "batteries-included" philosophy 
+              providing extensive built-in functionality.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-success">ORM</span>
+              <span class="badge bg-success">Admin Panel</span>
+              <span class="badge bg-success">Authentication</span>
+              <span class="badge bg-success">Security</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AWS -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-warning rounded-3 p-3 me-3">
+                <i class="fab fa-aws fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">Amazon Web Services</h4>
+                <small class="text-muted">Cloud Infrastructure</small>
+              </div>
+            </div>
+            <p class="card-text">
+              AWS EC2 provides scalable virtual servers with flexible instance types optimized for different workloads. 
+              Features include auto-scaling, load balancing, custom AMIs, and integration with VPC for secure networking. 
+              Pay-as-you-go pricing with on-demand, reserved, and spot instance options.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-warning">EC2</span>
+              <span class="badge bg-warning">Auto-scaling</span>
+              <span class="badge bg-warning">Load Balancing</span>
+              <span class="badge bg-warning">VPC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Docker -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-primary rounded-3 p-3 me-3">
+                <i class="fab fa-docker fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">Docker Containerization</h4>
+                <small class="text-muted">Application Packaging</small>
+              </div>
+            </div>
+            <p class="card-text">
+              Docker enables containerization of applications, packaging code and dependencies into portable containers. 
+              Ensures consistent environments across development, testing, and production while optimizing resource utilization 
+              and enabling seamless deployment across different platforms.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-primary">Containerization</span>
+              <span class="badge bg-primary">Portability</span>
+              <span class="badge bg-primary">Isolation</span>
+              <span class="badge bg-primary">Scalability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PostgreSQL -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-info rounded-3 p-3 me-3">
+                <i class="fas fa-database fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">PostgreSQL Database</h4>
+                <small class="text-muted">Relational Database</small>
+              </div>
+            </div>
+            <p class="card-text">
+              PostgreSQL is an advanced open-source relational database system known for reliability, security, and SQL compliance. 
+              Supports advanced data types, extensibility, ACID transactions, and robust performance optimization features 
+              making it ideal for complex applications.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-info">ACID Compliant</span>
+              <span class="badge bg-info">Extensible</span>
+              <span class="badge bg-info">JSON Support</span>
+              <span class="badge bg-info">Full-text Search</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nginx -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-success rounded-3 p-3 me-3">
+                <i class="fas fa-server fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">Nginx Web Server</h4>
+                <small class="text-muted">Reverse Proxy & Load Balancer</small>
+              </div>
+            </div>
+            <p class="card-text">
+              Nginx serves as a high-performance reverse proxy, load balancer, and web server. Efficiently handles static file 
+              serving, SSL termination, and proxies dynamic requests to Gunicorn. Known for exceptional performance under 
+              high concurrent loads with minimal resource usage.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-success">Reverse Proxy</span>
+              <span class="badge bg-success">Load Balancing</span>
+              <span class="badge bg-success">SSL/TLS</span>
+              <span class="badge bg-success">Caching</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gunicorn -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm hover-card">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-secondary rounded-3 p-3 me-3">
+                <i class="fas fa-cogs fa-2x text-white"></i>
+              </div>
+              <div>
+                <h4 class="card-title mb-1">Gunicorn WSGI Server</h4>
+                <small class="text-muted">Python Application Server</small>
+              </div>
+            </div>
+            <p class="card-text">
+              Gunicorn is a Python WSGI HTTP server that runs Django applications in production. Provides worker process 
+              management, graceful handling of requests, and seamless integration with reverse proxies like Nginx for 
+              optimal performance and reliability.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-secondary">WSGI</span>
+              <span class="badge bg-secondary">Multi-worker</span>
+              <span class="badge bg-secondary">Process Management</span>
+              <span class="badge bg-secondary">Production Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h2 class="display-6 fw-bold mb-4">Additional Features</h2>
+        
+        <!-- User Authentication -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-shield fa-2x text-primary me-3"></i>
+              <h4 class="mb-0">User Authentication System</h4>
+            </div>
+            <p class="mb-3">
+              Comprehensive user management powered by Django's built-in authentication framework with secure password hashing, 
+              session management, and extensible user models. Enhanced with django-allauth for social authentication and 
+              email verification capabilities.
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li><i class="fas fa-check-circle text-success me-2"></i>Secure password hashing</li>
+                  <li><i class="fas fa-check-circle text-success me-2"></i>Session management</li>
+                  <li><i class="fas fa-check-circle text-success me-2"></i>Custom user models</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li><i class="fas fa-check-circle text-success me-2"></i>Email verification</li>
+                  <li><i class="fas fa-check-circle text-success me-2"></i>User event tracking</li>
+                  <li><i class="fas fa-check-circle text-success me-2"></i>Permission system</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REST API -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-code fa-2x text-info me-3"></i>
+              <h4 class="mb-0">RESTful API Integration</h4>
+            </div>
+            <p class="mb-3">
+              Built with Django REST Framework (DRF) to provide robust API endpoints. Follows REST architectural principles 
+              with stateless communication, standard HTTP methods, and JSON data format. Designed for future frontend 
+              framework integration or third-party service consumption.
+            </p>
+            
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <h6 class="fw-semibold">HTTP Methods</h6>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge bg-success">GET</span>
+                  <span class="badge bg-primary">POST</span>
+                  <span class="badge bg-warning">PUT</span>
+                  <span class="badge bg-danger">DELETE</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-semibold">Data Formats</h6>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge bg-info">JSON</span>
+                  <span class="badge bg-secondary">XML</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark rounded p-3">
+              <small class="text-light">
+                <strong>API Endpoint:</strong><br>
+                <a href="https://www.django-blog-jb.com/my_blog/api/posts/" target="_blank" class="text-info text-decoration-none">
+                  https://www.django-blog-jb.com/my_blog/api/posts/
+                </a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="fas fa-chart-line me-2"></i>Performance Metrics
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <small>Security Score</small>
+                <small>95%</small>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-success" style="width: 95%"></div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <small>Performance</small>
+                <small>88%</small>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-info" style="width: 88%"></div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <small>Scalability</small>
+                <small>92%</small>
+              </div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">
+              <i class="fas fa-tools me-2"></i>Development Tools
+            </h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="fab fa-git-alt text-danger me-2"></i>Git Version Control</li>
+              <li class="mb-2"><i class="fab fa-github text-dark me-2"></i>GitHub Repository</li>
+              <li class="mb-2"><i class="fas fa-terminal text-success me-2"></i>CI/CD Pipeline</li>
+              <li class="mb-2"><i class="fas fa-shield-alt text-primary me-2"></i>SSL/TLS Security</li>
+              <li class="mb-2"><i class="fas fa-tachometer-alt text-warning me-2"></i>Performance Monitoring</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block extra_css %}
+<style>
+.bg-gradient-dark {
+  background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+}
+
+.progress {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.4em 0.8em;
+}
+</style>
+{% endblock extra_css %}
 {% endblock content %}
