@@ -35,4 +35,7 @@ poetry.lock
 *.dockerignore
 docker-compose.override.yml
 
-settings.dev.py
+settings.development.py
+env.prod 
+env.dev
+env.local-prod

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: your-dockerhub-username/django-blog:latest
+    image: jbur645/my_blog:latest
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/app/staticfiles
@@ -47,7 +47,6 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-<<<<<<< HEAD:docker-compose.yml
     entrypoint: >
       /bin/sh -c 'trap exit TERM; while :; do
         certbot renew --webroot -w /var/www/certbot --quiet;
