@@ -25,15 +25,15 @@ ENV DJANGO_ENV=production
 # Create staticfiles directory
 RUN mkdir -p /app/staticfiles
 
-# Create entrypoint script
-COPY docker-entrypoint.prod.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+# Create entrypoint script, enable during production
+#COPY docker-entrypoint.prod.sh /docker-entrypoint.sh
+#RUN chmod +x /docker-entrypoint.sh
 
 # Expose the application port
 EXPOSE 8000
 
-# Use entrypoint script
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Use entrypoint script, enable during production
+#ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Start the application
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
