@@ -1,49 +1,348 @@
 {% extends "blog_base.html" %}
 {% load markdown_extras %}
 
-{% block title %}
-    {{ post.title }} 
-{% endblock %}
+{% block title %}{{ post.title }} - Joel's Blog{% endblock title %}
 
 {% block content %}
-<article class="blog-post">
-    <header>
-        <h1 class="post-title">{{ post.title }}</h1>
-        <p class="publish-date">Published on: {{ post.publish }}</p>
-    </header>
-    <br>
-    <div class="post-content">
-        {{ post.content|render_markdown }}
-    </div>
-</article>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Article Header -->
+            <article class="blog-article">
+                <header class="article-header mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-dark text-white px-3 py-2 rounded-pill me-3">
+                            <i class="fas fa-tag me-2"></i>Development
+                        </span>
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-2"></i>5 min read
+                        </small>
+                    </div>
+                    
+                    <h1 class="article-title display-4 fw-bold mb-4">{{ post.title }}</h1>
+                    
+                    <div class="article-meta d-flex align-items-center justify-content-between py-3 border-top border-bottom">
+                        <div class="author-info d-flex align-items-center">
+                            <div class="author-avatar bg-dark rounded-circle me-3 d-flex align-items-center justify-content-center text-white" 
+                                 style="width: 50px; height: 50px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">{{ post.author.get_full_name|default:post.author.username }}</div>
+                                <small class="text-muted">Published {{ post.publish|date:"F j, Y" }}</small>
+                            </div>
+                        </div>
+                        
+                        <div class="article-actions">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="shareArticle()">
+                                    <i class="fas fa-share-alt me-1"></i>Share
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="bookmarkArticle()">
+                                    <i class="fas fa-bookmark me-1"></i>Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
-<br>
+                <!-- Article Content -->
+                <div class="article-content mb-5">
+                    <div class="content-body">
+                        {{ post.content|render_markdown }}
+                    </div>
+                </div>
 
-{% with test_md="# Hello World\nThis is **bold** text." as sample %}
-    {{ sample|render_markdown }}
-{% endwith %}
-
-
-<section class="comments">
-    <h2>Comments</h2>
-    {% for comment in comments %}
-        <div class="comment">
-            <p class="comment-body">{{ comment.body }}</p>
-            <p class="comment-meta">By <strong>{{ comment.name }}</strong> on {{ comment.created|date:"F j, Y, g:i a" }}</p>
+                <!-- Article Footer -->
+                <footer class="article-footer border-top pt-4 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <span class="me-3">Share this article:</span>
+                                <div class="social-share">
+                                    <a href="#" class="btn btn-outline-primary btn-sm me-2" onclick="shareTwitter()">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-info btn-sm me-2" onclick="shareLinkedIn()">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-success btn-sm" onclick="copyLink()">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <small class="text-muted">
+                                Last updated: {{ post.updated|date:"F j, Y" }}
+                            </small>
+                        </div>
+                    </div>
+                </footer>
+            </article>
         </div>
-    {% empty %}
-        <p>No comments yet.</p>
-    {% endfor %}
-</section>
+    </div>
 
-<br>
+    <!-- Comments Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <section class="comments-section">
+                <div class="comments-header d-flex align-items-center justify-content-between mb-4">
+                    <h3 class="fw-bold mb-0">
+                        <i class="fas fa-comments me-2"></i>
+                        Comments ({{ comments.count }})
+                    </h3>
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-dark">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login to Comment
+                    </a>
+                    {% endif %}
+                </div>
 
-<section class="add-comment">
-    <h3>Add a Comment</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</section>
-{% endblock %}
+                <!-- Comment Form -->
+                {% if user.is_authenticated %}
+                <div class="comment-form-section mb-5">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="user-avatar bg-dark rounded-circle me-3 d-flex align-items-center justify-content-center text-white" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">{{ user.get_full_name|default:user.username }}</div>
+                                    <small class="text-muted">Add your comment</small>
+                                </div>
+                            </div>
+                            
+                            <form method="post" class="comment-form">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <textarea class="form-control border-0 bg-light" 
+                                              name="{{ comment_form.body.name }}" 
+                                              rows="4" 
+                                              placeholder="Share your thoughts..."></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Be respectful and constructive in your comments.
+                                    </small>
+                                    <button type="submit" class="btn btn-dark">
+                                        <i class="fas fa-paper-plane me-2"></i>Post Comment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <!-- Login Prompt -->
+                <div class="login-prompt text-center py-5 mb-5">
+                    <div class="card border-0 bg-light">
+                        <div class="card-body p-4">
+                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                            <h5 class="fw-bold mb-3">Join the Discussion</h5>
+                            <p class="text-muted mb-4">
+                                Sign in to share your thoughts and engage with the community.
+                            </p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-dark">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                                </a>
+                                <a href="{% url 'account_signup' %}?next={{ request.path }}" class="btn btn-outline-dark">
+                                    <i class="fas fa-user-plus me-2"></i>Create Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Comments List -->
+                <div class="comments-list">
+                    {% for comment in comments %}
+                    <div class="comment-item border-bottom pb-4 mb-4">
+                        <div class="d-flex">
+                            <div class="comment-avatar bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                 style="width: 44px; height: 44px; min-width: 44px;">
+                                <i class="fas fa-user text-muted"></i>
+                            </div>
+                            <div class="comment-content flex-grow-1">
+                                <div class="comment-header d-flex align-items-center justify-content-between mb-2">
+                                    <div class="comment-meta">
+                                        <span class="fw-semibold">{{ comment.name }}</span>
+                                        <small class="text-muted ms-2">
+                                            <i class="fas fa-clock me-1"></i>
+                                            {{ comment.created|date:"F j, Y \a\t g:i A" }}
+                                        </small>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="replyToComment({{ comment.id }})">
+                                        <i class="fas fa-reply me-1"></i>Reply
+                                    </button>
+                                    {% endif %}
+                                </div>
+                                <div class="comment-body">
+                                    <p class="mb-0">{{ comment.body|linebreaks }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="no-comments text-center py-5">
+                        <i class="fas fa-comment-slash fa-3x text-muted mb-3"></i>
+                        <h6 class="fw-bold mb-2">No comments yet</h6>
+                        <p class="text-muted">Be the first to share your thoughts!</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <section class="related-articles bg-light rounded-4 p-4">
+                <h4 class="fw-bold mb-4">
+                    <i class="fas fa-newspaper me-2"></i>Related Articles
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card border-0 h-100">
+                            <div class="card-body">
+                                <h6 class="fw-semibold mb-2">
+                                    <a href="#" class="text-decoration-none">Getting Started with Django</a>
+                                </h6>
+                                <small class="text-muted">Learn the basics of Django web development...</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0 h-100">
+                            <div class="card-body">
+                                <h6 class="fw-semibold mb-2">
+                                    <a href="#" class="text-decoration-none">Docker Best Practices</a>
+                                </h6>
+                                <small class="text-muted">Professional tips for containerizing applications...</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'my_blog:post_list' %}" class="btn btn-outline-dark">
+                        <i class="fas fa-arrow-left me-2"></i>Back to All Articles
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+.article-title {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+}
+
+.content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.content-body h1, .content-body h2, .content-body h3 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-body p {
+    margin-bottom: 1.5rem;
+}
+
+.content-body code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.comment-item:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.comment-form textarea:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.social-share a {
+    transition: transform 0.3s ease;
+}
+
+.social-share a:hover {
+    transform: translateY(-2px);
+}
+</style>
+{% endblock extra_css %}
+
+{% block extra_js %}
+<script>
+function shareTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('{{ post.title|escapejs }}');
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareLinkedIn() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copied to clipboard!');
+    });
+}
+
+function replyToComment(commentId) {
+    // Scroll to comment form
+    const commentForm = document.querySelector('.comment-form');
+    if (commentForm) {
+        commentForm.scrollIntoView({ behavior: 'smooth' });
+        const textarea = commentForm.querySelector('textarea');
+        textarea.focus();
+    }
+}
+
+function shareArticle() {
+    if (navigator.share) {
+        navigator.share({
+            title: '{{ post.title|escapejs }}',
+            url: window.location.href
+        });
+    } else {
+        copyLink();
+    }
+}
+
+function bookmarkArticle() {
+    // Add to localStorage as a simple bookmark
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+    const bookmark = {
+        title: '{{ post.title|escapejs }}',
+        url: window.location.href,
+        date: new Date().toISOString()
+    };
+    bookmarks.push(bookmark);
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    alert('Article bookmarked!');
+}
+</script>
+{% endblock extra_js %}
+{% endblock content %}

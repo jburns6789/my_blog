@@ -1,65 +1,282 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Joel Burns - Python Developer{% endblock title %}
 
 {% block content %}
-<div class="container p-3 mx-auto">
-    <div class="d-flex justify-content-center align-items-start flex-wrap">
+<!-- Hero Section -->
+<section class="hero-section position-relative overflow-hidden">
+  <div class="container-fluid p-0">
+    <div class="row g-0 min-vh-100">
+      <!-- Left Side - Main Content -->
+      <div class="col-lg-8 d-flex align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-8 col-lg-10 mx-auto text-center text-lg-start">
+              <div class="hero-content">
+                <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill mb-3">
+                  <i class="fas fa-code me-2"></i>Python Developer
+                </span>
+                <h1 class="display-3 fw-bold mb-4">
+                  Hi, I'm <span class="text-primary">Joel Burns</span>
+                </h1>
+                <p class="lead text-muted mb-4 fs-5">
+                  I build scalable and secure web applications using 
+                  <strong>Python</strong>, <strong>Django</strong>, and modern web technologies. 
+                  Passionate about creating efficient solutions for complex challenges.
+                </p>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex flex-column flex-sm-row gap-3 mb-5">
+                  <a href="{% url 'my_blog:post_list' %}" class="btn btn-primary btn-lg px-4">
+                    <i class="fas fa-blog me-2"></i>View My Blog
+                  </a>
+                  <a href="https://github.com/jburns6789" target="_blank" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="fab fa-github me-2"></i>GitHub Portfolio
+                  </a>
+                </div>
 
-        <div class="auth-section p-3 text-center">
-            {% if user.is_authenticated %}
-                <p>Hi {{ user.email }}!</p>
-                <form method="post" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-link">Logout</button>
-                </form>
-            {% else %}
-                <p>You are not logged in</p>
-                <a href="{% url 'account_login' %}">Log In</a>
-                <a href="{% url 'account_signup' %}">Sign Up</a>
-            {% endif %}
-        </div>
-
-        <div class="hero-section d-flex flex-column justify-content-center align-items-center text-center p-5">
-            <h1 class="display-4">Hi, I'm Joel Burns!</h1>
-            <p class="lead mt-3">I build scalable and secure web applications using Python, Django, and modern web technologies.</p>
-            <a href="https://github.com/jburns6789" class="btn btn-primary btn-lg">View My GitHub</a>
-        </div>
-
-        <div class="skills-section p-3 text-center">
-            <h2 class="text-center">Skills & Technologies</h2>
-            <div class="d-flex justify-content-center flex-wrap mt-4">
-                <div class="p-3 text-center">
-                    <img src="{% static 'images/icons/python.png' %}" alt="Python" width="50">
-                    <p>Python</p>
+                <!-- Tech Stack -->
+                <div class="tech-stack">
+                  <h6 class="text-muted mb-3">Tech Stack:</h6>
+                  <div class="d-flex flex-wrap gap-4 justify-content-center justify-content-lg-start">
+                    <div class="tech-item text-center">
+                      <div class="tech-icon bg-light rounded-3 p-3 mb-2">
+                        <img src="{% static 'images/icons/python.png' %}" alt="Python" width="40" height="40">
+                      </div>
+                      <small class="fw-medium">Python</small>
+                    </div>
+                    <div class="tech-item text-center">
+                      <div class="tech-icon bg-light rounded-3 p-3 mb-2">
+                        <img src="{% static 'images/icons/icons8-django-96.png' %}" alt="Django" width="40" height="40">
+                      </div>
+                      <small class="fw-medium">Django</small>
+                    </div>
+                    <div class="tech-item text-center">
+                      <div class="tech-icon bg-light rounded-3 p-3 mb-2">
+                        <img src="{% static 'images/icons/icons8-aws-96.png' %}" alt="AWS" width="40" height="40">
+                      </div>
+                      <small class="fw-medium">AWS</small>
+                    </div>
+                    <div class="tech-item text-center">
+                      <div class="tech-icon bg-light rounded-3 p-3 mb-2">
+                        <img src="{% static 'images/icons/docker.png' %}" alt="Docker" width="40" height="40">
+                      </div>
+                      <small class="fw-medium">Docker</small>
+                    </div>
+                  </div>
                 </div>
-                <div class="p-3 text-center">
-                    <img src="{% static 'images/icons/icons8-django-96.png' %}" alt="Django" width="50">
-                    <p>Django</p>
-                </div>
-                <div class="p-3 text-center">
-                    <img src="{% static 'images/icons/icons8-aws-96.png' %}" alt="AWS" width="50">
-                    <p>AWS</p>
-                </div>
-                <div class="p-3 text-center">
-                    <img src="{% static 'images/icons/docker.png' %}" alt="Docker" width="50">
-                    <p>Docker</p>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-<div class="blog-link p-3 text-center">
-    <h2 class="text-center">Blog Feature</h2>
-    <div class="d-flex justify-content-center flex-wrap mt-4">
-        <div class="p-3 text-center">
-            <a class="nav-link" href="{% url 'my_blog:post_list' %}">Check out my blog built using Django.</a>
-            <p>The blog is dynamically rendered using Django and Postgres for storage.
+      <!-- Right Side - Authentication Panel -->
+      <div class="col-lg-4 bg-gradient-primary d-flex align-items-center">
+        <div class="w-100 p-4 p-lg-5">
+          <div class="auth-panel">
+            {% if user.is_authenticated %}
+              <!-- Authenticated User Panel -->
+              <div class="text-center text-white">
+                <div class="user-avatar bg-white bg-opacity-20 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                  <i class="fas fa-user fa-2x text-white"></i>
+                </div>
+                <h4 class="fw-bold mb-2">Welcome back!</h4>
+                <p class="mb-1 opacity-90">{{ user.email|default:user.username }}</p>
+                <small class="opacity-75 d-block mb-4">
+                  Member since {{ user.date_joined|date:"F Y" }}
+                </small>
+                
+                <div class="d-grid gap-3">
+                  <a href="{% url 'my_blog:post_list' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-blog me-2"></i>View Blog Posts
+                  </a>
+                  <a href="{% url 'about' %}" class="btn btn-outline-light">
+                    <i class="fas fa-user me-2"></i>About Me
+                  </a>
+                  
+                  <div class="dropdown-divider bg-white bg-opacity-20 my-3"></div>
+                  
+                  <form method="post" action="{% url 'account_logout' %}" class="d-grid">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                      <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                  </form>
+                </div>
+              </div>
+            {% else %}
+              <!-- Login/Signup Panel -->
+              <div class="text-center text-white">
+                <div class="mb-4">
+                  <i class="fas fa-lock fa-3x mb-3 opacity-75"></i>
+                  <h4 class="fw-bold mb-2">Join the Community</h4>
+                  <p class="opacity-90 mb-4">
+                    Sign in to access exclusive content, comment on posts, and connect with fellow developers.
+                  </p>
+                </div>
+
+                <div class="d-grid gap-3">
+                  <a href="{% url 'account_login' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                  </a>
+                  <a href="{% url 'account_signup' %}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Create Account
+                  </a>
+                </div>
+
+                <div class="mt-4 pt-4 border-top border-white border-opacity-20">
+                  <h6 class="fw-semibold mb-3">Why Join?</h6>
+                  <div class="text-start">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fas fa-check-circle me-3 text-warning"></i>
+                      <small>Comment on blog posts</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fas fa-check-circle me-3 text-warning"></i>
+                      <small>Access to exclusive content</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fas fa-check-circle me-3 text-warning"></i>
+                      <small>Developer community access</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <i class="fas fa-check-circle me-3 text-warning"></i>
+                      <small>Personal dashboard</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <!-- Background Elements -->
+  <div class="position-absolute top-0 start-0 w-100 h-100 overflow-hidden" style="z-index: -1;">
+    <div class="position-absolute top-50 start-0 translate-middle-y opacity-25">
+      <i class="fas fa-code" style="font-size: 20rem; color: #f8f9fa;"></i>
+    </div>
+  </div>
+</section>
 
+<!-- Features Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Blog Feature -->
+      <div class="col-lg-4">
+        <div class="feature-card text-center p-4 bg-white rounded-4 shadow-sm h-100 hover-card">
+          <div class="feature-icon bg-primary bg-opacity-10 rounded-3 p-3 d-inline-flex mb-3">
+            <i class="fas fa-blog fa-2x text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Dynamic Blog</h5>
+          <p class="text-muted mb-4">
+            Built with Django and PostgreSQL, featuring pagination, comments, and responsive design.
+          </p>
+          <a href="{% url 'my_blog:post_list' %}" class="btn btn-outline-primary">
+            Explore Blog <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Technology Feature -->
+      <div class="col-lg-4">
+        <div class="feature-card text-center p-4 bg-white rounded-4 shadow-sm h-100 hover-card">
+          <div class="feature-icon bg-info bg-opacity-10 rounded-3 p-3 d-inline-flex mb-3">
+            <i class="fas fa-cogs fa-2x text-info"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Modern Stack</h5>
+          <p class="text-muted mb-4">
+            Powered by Python, Django, AWS, Docker, and modern web technologies for scalable solutions.
+          </p>
+          <a href="{% url 'sitefeatures' %}" class="btn btn-outline-info">
+            View Tech Stack <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- About Feature -->
+      <div class="col-lg-4">
+        <div class="feature-card text-center p-4 bg-white rounded-4 shadow-sm h-100 hover-card">
+          <div class="feature-icon bg-success bg-opacity-10 rounded-3 p-3 d-inline-flex mb-3">
+            <i class="fas fa-user fa-2x text-success"></i>
+          </div>
+          <h5 class="fw-bold mb-3">About Joel</h5>
+          <p class="text-muted mb-4">
+            Software engineer transitioning from healthcare, passionate about building innovative web solutions.
+          </p>
+          <a href="{% url 'about' %}" class="btn btn-outline-success">
+            Learn More <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block extra_css %}
+<style>
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-primary-soft {
+  background-color: rgba(13, 110, 253, 0.1) !important;
+}
+
+.hero-section {
+  position: relative;
+}
+
+.auth-panel {
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+}
+
+.tech-icon {
+  transition: transform 0.3s ease;
+}
+
+.tech-icon:hover {
+  transform: translateY(-5px);
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+}
+
+.user-avatar {
+  transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 991px) {
+  .hero-section .col-lg-4 {
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .display-3 {
+    font-size: 2.5rem;
+  }
+  
+  .tech-stack .d-flex {
+    justify-content: center !important;
+  }
+}
+</style>
+{% endblock extra_css %}
 {% endblock content %}
