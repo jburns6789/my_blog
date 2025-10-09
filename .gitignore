@@ -24,6 +24,8 @@ db.sqlite3
 
 # Environment variables
 .env
+.env.dev
+.env.prod
 
 # Pipenv and Poetry
 Pipfile.lock
@@ -32,3 +34,8 @@ poetry.lock
 # Docker-specific files
 *.dockerignore
 docker-compose.override.yml
+
+settings.development.py
+env.prod 
+env.dev
+env.local-prod
