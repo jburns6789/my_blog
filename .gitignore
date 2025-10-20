@@ -39,3 +39,30 @@ settings.development.py
 env.prod 
 env.dev
 env.local-prod
+
+
+# Environment files
+.env
+.env.local
+.env.prod
+.env.production
+
+# Docker compose with secrets
+docker-compose.override.yml
+
+# Database files
+*.db
+*.sqlite3
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+
+# Logs
+*.log
+logs/
+
+# Python cache
+__pycache__/
+*.pyc
