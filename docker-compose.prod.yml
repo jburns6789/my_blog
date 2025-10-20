@@ -1,40 +1,29 @@
-
 services:
   db:
     image: postgres:14
     volumes:
-      - /home/ec2-user/docker-data/postgres:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_DB: joel_postgres_prod
-      POSTGRES_USER: joel_b
-      POSTGRES_PASSWORD: secure_prod_password_123
+      - my_blog_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env.prod
     restart: unless-stopped
 
   web:
     image: jbur645/my_django-blog:latest
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3
     volumes:
-      - /home/ec2-user/docker-data/staticfiles:/app/staticfiles
-      - /home/ec2-user/docker-data/media:/app/media
-      - /home/ec2-user/docker-data/certbot:/var/www/certbot
-     
+      - my_blog_static_volume:/app/staticfiles
+      - my_blog_media_volume:/app/media
+    env_file:
+      - .env.prod
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
-      DJANGO_SECRET_KEY: 'mJogVe8t29Ifhlvl8+ThpUoGX1x2sNm87z6FxzV3ZZ8='
-      DEBUG_SETTING: "False"
-      ALLOWED_HOSTS: "www.django-blog-jb.com,django-blog-jb.com,3.15.27.43,web,localhost"
-      DATABASE_NAME: joel_postgres_prod
-      DATABASE_USER: joel_b
-      POSTGRES_PASSWORD: secure_prod_password_123
       DATABASE_HOST: db
-      DATABASE_PORT: "5432"
-      EMAIL_HOST_USER: "djangotesting8@gmail.com"
-      EMAIL_HOST: "smtp.gmail.com"
-      EMAIL_HOST_PASSWORD: "swno fiqj sxcn ezpa"
-      EMAIL_USE_TLS: "True"
-      EMAIL_PORT: "587"
+      DATABASE_PORT: 5432
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_USE_TLS: true
+      EMAIL_PORT: 587
     expose:
-      - "8000"
+      - 8000
     depends_on:
       - db
     restart: unless-stopped
@@ -43,8 +32,8 @@ services:
     image: nginx:alpine
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /home/ec2-user/docker-data/staticfiles:/app/staticfiles
-      - /home/ec2-user/docker-data/media:/app/media
+      - my_blog_static_volume:/app/staticfiles
+      - my_blog_media_volume:/app/media
       - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
@@ -53,3 +42,10 @@ services:
       - web
     restart: unless-stopped
 
+volumes:
+  my_blog_postgres_data:
+    external: true
+  my_blog_static_volume:
+    external: true  
+  my_blog_media_volume:
+    external: true
