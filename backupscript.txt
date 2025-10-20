@@ -1,0 +1,12 @@
+cat > /home/ec2-user/backup-db.sh << 'EOF'
+#!/bin/bash
+DATE=$(date +%Y%m%d_%H%M%S)
+docker exec my_blog-db-1 pg_dump -U joel_b joel_postgres_prod > /home/ec2-user/backups/db_backup_$DATE.sql
+aws s3 cp /home/ec2-user/backups/db_backup_$DATE.sql s3://your-backup-bucket/ 2>/dev/null || echo "S3 upload failed"
+find /home/ec2-user/backups/ -name "db_backup_*.sql" -mtime +7 -delete
+EOF
+
+chmod +x /home/ec2-user/backup-db.sh
+mkdir -p /home/ec2-user/backups
+
+aws ec2 create-snapshot --volume-id vol-0bf8794dc4def471b --description "my_blog_backup_$(date +%Y%m%d)" --region us-east-2
