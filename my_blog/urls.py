@@ -14,6 +14,8 @@ urlpatterns = [
     path('api/posts/', PostListAPIView.as_view(), name='api_post_list'),
     path('api/posts/<slug:slug>', PostDetailAPIView.as_view(), name='api_post_detail'),
     path('api/comments/', CommentListAPIView.as_view(), name='api_comment_list'),
+
+    
 ]
 
 
