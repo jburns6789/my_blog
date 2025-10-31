@@ -3,8 +3,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
-from .forms import CommentForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+
+from .models import Post, Comment
+from .forms import CommentForm
 
 from rest_framework import generics
 from .serializers import PostSerializer, CommentSerializer
@@ -64,5 +68,4 @@ class PostDetailAPIView(generics.RetrieveAPIView):
 class CommentListAPIView(generics.ListAPIView):
     queryset = Comment.objects.filter(active=True)
     serializer_class = CommentSerializer
-
 
