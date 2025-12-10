@@ -1,45 +1,43 @@
-version: '3.8'
-
 services:
-  web:
-    image: jbur645/my_django-blog:v2
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+  db:
+    image: postgres:14
     volumes:
-      - static_volume:/app/staticfiles
-      - media_volume:/app/media
+      - my_blog_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env.prod
+    restart: unless-stopped
+
+  web:
+    image: jbur645/my_django-blog:latest
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - my_blog_static_volume:/app/staticfiles
+      - my_blog_media_volume:/app/media
     env_file:
       - .env.prod
     environment:
-      - DJANGO_ENV=production
-    ports:
-      - "8000:8000"
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_USE_TLS: true
+      EMAIL_PORT: 587
+    expose:
+      - 8000
     depends_on:
       - db
     restart: unless-stopped
 
-  db:
-    image: postgres:14
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    restart: unless-stopped
-
   nginx:
-    image: nginx:latest
-    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - my_blog_static_volume:/app/staticfiles
+      - my_blog_media_volume:/app/media
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/app/staticfiles
-      - media_volume:/app/media
-      - nginx_logs:/var/log/nginx
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
     depends_on:
       - web
     restart: unless-stopped
@@ -60,7 +58,9 @@ services:
       - nginx
 
 volumes:
-  static_volume:
-  media_volume:
-  postgres_data:
-  nginx_logs:
+  my_blog_postgres_data:
+    external: true
+  my_blog_static_volume:
+    external: true  
+  my_blog_media_volume:
+    external: true
