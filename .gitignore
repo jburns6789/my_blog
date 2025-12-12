@@ -34,6 +34,10 @@ poetry.lock
 # Docker-specific files
 *.dockerignore
 docker-compose.override.yml
+docker-compose.dev.yml
+docker-compose.local-prod.yml
+
+
 
 settings.development.py
 env.prod 
