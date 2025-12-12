@@ -26,6 +26,7 @@ db.sqlite3
 .env
 .env.dev
 .env.prod
+.env.local-prod
 
 # Pipenv and Poetry
 Pipfile.lock
@@ -37,9 +38,4 @@ docker-compose.override.yml
 docker-compose.dev.yml
 docker-compose.local-prod.yml
 
-
-
 settings.development.py
-env.prod 
-env.dev
-env.local-prod
