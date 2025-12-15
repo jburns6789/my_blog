@@ -2,11 +2,11 @@ import os
 import subprocess
 import boto3
 from datetime import datetime
-from django.core.management.base import Basecommand
+from django.core.management.base import BaseCommand
 from django.conf import settings
 
-class Command(BaseCommand);
-    help = 'Backup PostgresSQL databasse nad upload to s3'
+class Command(BaseCommand):
+    help = 'Backup PostgresSQL database naand upload to s3'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -30,11 +30,11 @@ class Command(BaseCommand);
         try:
             # Step 1: Get database credentials
             db_config = settings.DATABASES['default']
-            db_name = db_config['DATABASE_NAME']
-            db_user = db_config['DATABASE_USER']
-            db_password = db_config['DATABASE_PASSWORD']
-            db_host = db_config['DATABASE_HOST']
-            db_port = db_config.get('DATABASE_PORT', '5432')
+            db_name = db_config['NAME']
+            db_user = db_config['USER']
+            db_password = db_config['PASSWORD']
+            db_host = db_config['HOST']
+            db_port = db_config.get('PORT', '5432')
             
             self.stdout.write(f"Starting backup: {backup_filename}")
             
@@ -106,7 +106,7 @@ class Command(BaseCommand);
             
             self.stdout.write(
                 self.style.SUCCESS(
-                    f'✅ Backup successful: s3://{s3_bucket}/{s3_key}'
+                    f'Backup successful: s3://{s3_bucket}/{s3_key}'
                 )
             )
             
@@ -117,7 +117,7 @@ class Command(BaseCommand);
             
         except Exception as e:
             self.stdout.write(
-                self.style.ERROR(f'❌ Backup failed: {str(e)}')
+                self.style.ERROR(f'Backup failed: {str(e)}')
             )
             raise
 

@@ -39,7 +39,7 @@ class Command(BaseCommand):
         try:
             # Step 1: Download from S3
             s3_client = boto3.client('s3')
-            s3_bucket = 'myblogpostgres'
+            s3_bucket = 'myblog-backups'
             s3_key = f"database-backups/{backup_file}"
             
             self.stdout.write(f"Downloading from S3: {s3_key}")
