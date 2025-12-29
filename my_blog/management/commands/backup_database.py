@@ -27,6 +27,7 @@ class Command(BaseCommand):
         backup_path = f"{temp_dir}/{backup_filename}"
         compressed_path = f"{temp_dir}/{compressed_filename}"
 
+
         try:
             # Step 1: Get database credentials
             db_config = settings.DATABASES['default']
@@ -40,7 +41,7 @@ class Command(BaseCommand):
             
             # Step 2: Create database dump
             env = os.environ.copy()
-            env['DATABASE_PASSWORD'] = db_password
+            env['PGPASSWORD'] = db_password
             
             dump_cmd = [
                 'pg_dump',

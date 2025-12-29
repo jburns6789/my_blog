@@ -2,18 +2,22 @@
 Production settings
 """
 from .base import *
+from environs import Env
 
+env = Env()
 env.read_env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
-
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
-# Database for production
+CSRF_TRUSTED_ORIGINS = [
+    'https://django-blog-jb.com',
+    'https://www.django-blog-jb.com',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -25,15 +29,12 @@ DATABASES = {
     }
 }
 
-# Static files configuration for production
 STATIC_URL = '/static/'
 STATIC_ROOT = '/app/staticfiles'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/app/media'
 
 if not DEBUG:
-    # Security settings for production
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
@@ -42,10 +43,8 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
 
-
-# Email configuration for production
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
